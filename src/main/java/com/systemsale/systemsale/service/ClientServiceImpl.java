@@ -1,13 +1,14 @@
-package service;
+package com.systemsale.systemsale.service;
 
 
-import dto.ClientDTO;
-import entity.Client;
-import mapper.ClientMapper;
+import com.systemsale.systemsale.dto.ClientDTO;
+import com.systemsale.systemsale.entity.Client;
+import com.systemsale.systemsale.mapper.ClientMapper;
+import com.systemsale.systemsale.repository.IClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import repository.IClientRepository;
 
 import java.util.List;
 
@@ -25,9 +26,10 @@ public class ClientServiceImpl implements  IClientService{
         return clientMapper.toDTO(client1);
     }
     public List<ClientDTO> read() {
-        var client = clientRepository.findAll();
+        var client = clientRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         return clientMapper.toDTOList(client);
     }
+
 
     public ClientDTO readById(Long id) {
         Client client = clientRepository.findById(id).get();

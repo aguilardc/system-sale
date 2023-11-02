@@ -1,7 +1,7 @@
-package service;
+package com.systemsale.systemsale.service;
 
-import dto.ClientDTO;
-import entity.Client;
+import com.systemsale.systemsale.dto.ClientDTO;
+import com.systemsale.systemsale.entity.Client;
 
 import java.util.List;
 

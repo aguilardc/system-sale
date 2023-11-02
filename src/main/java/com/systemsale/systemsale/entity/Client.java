@@ -1,4 +1,4 @@
-package entity;
+package com.systemsale.systemsale.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,7 +16,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombres;
-    private String apellidosPaternos;
-    private String apellidosMaterno;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private String edad;
 }

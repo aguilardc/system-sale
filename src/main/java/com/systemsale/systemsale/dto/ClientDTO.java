@@ -1,4 +1,4 @@
-package dto;
+package com.systemsale.systemsale.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +10,8 @@ import lombok.Setter;
 public class ClientDTO {
     private Long id;
     private String nombres;
-    private String apellidosPaterno;
-    private String apellidosMaterno;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private String edad;
 
 }

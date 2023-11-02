@@ -1,12 +1,10 @@
-package mapper;
+package com.systemsale.systemsale.mapper;
 
-import dto.ClientDTO;
-import entity.Client;
-import org.aspectj.apache.bcel.generic.InstructionConstants;
+import com.systemsale.systemsale.dto.ClientDTO;
+import com.systemsale.systemsale.entity.Client;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

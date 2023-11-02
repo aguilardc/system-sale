@@ -1,8 +1,7 @@
-package repository;
+package com.systemsale.systemsale.repository;
 
-import entity.Client;
+import com.systemsale.systemsale.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 public interface IClientRepository extends JpaRepository<Client, Long> {
 }

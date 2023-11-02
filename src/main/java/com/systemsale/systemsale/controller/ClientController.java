@@ -1,20 +1,20 @@
-package controller;
+package com.systemsale.systemsale.controller;
 
 
-import dto.ClientDTO;
-import entity.Client;
+import com.systemsale.systemsale.dto.ClientDTO;
+import com.systemsale.systemsale.entity.Client;
+import com.systemsale.systemsale.service.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.ClientServiceImpl;
 
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/client")
+@RequestMapping("api/clientes")
 public class ClientController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class ClientController {
     public ResponseEntity<ClientDTO> create(@RequestBody Client client) {
         try {
             ClientDTO objClient = clientService.create(client);
-            return ResponseEntity.created(new URI("/api/client" + objClient.getId())).body(objClient);
+            return ResponseEntity.created(new URI("/api/clientes" + objClient.getId())).body(objClient);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -43,7 +43,7 @@ public class ClientController {
         }
         return ResponseEntity.ok(client);
     }
-    @PutMapping("/{id}/")
+    @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Client client) {
         var client1 = this.clientService.readById(id);
         if (client1 == null) return  ResponseEntity.notFound().build();
