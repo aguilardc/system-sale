@@ -3,7 +3,7 @@ package com.systemsale.systemsale.controller;
 
 import com.systemsale.systemsale.dto.ClientDTO;
 import com.systemsale.systemsale.entity.Client;
-import com.systemsale.systemsale.service.ClientServiceImpl;
+import com.systemsale.systemsale.service.client.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.systemsale.systemsale.service;
+package com.systemsale.systemsale.service.client;
 
 import com.systemsale.systemsale.dto.ClientDTO;
 import com.systemsale.systemsale.entity.Client;
