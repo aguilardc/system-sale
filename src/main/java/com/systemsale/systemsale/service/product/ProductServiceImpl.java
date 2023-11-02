@@ -1,17 +1,15 @@
 package com.systemsale.systemsale.service.product;
 
 import com.systemsale.systemsale.dto.ProductDTO;
-import com.systemsale.systemsale.entity.Client;
 import com.systemsale.systemsale.entity.Product;
 import com.systemsale.systemsale.mapper.ProductMapper;
-import com.systemsale.systemsale.repository.IClientRepository;
 import com.systemsale.systemsale.repository.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements IProductService {
@@ -36,9 +34,8 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public ProductDTO readById(Long id) {
-        Product product1 = productRepository.findById(id).get();
-        if (ObjectUtils.isEmpty(product1)) return null;
-        return productMapper.toDTO(product1);
+        Optional<Product> product = productRepository.findById(id);
+        return product.map(value -> productMapper.toDTO((Product) value)).orElse(null);
 
     }
 
