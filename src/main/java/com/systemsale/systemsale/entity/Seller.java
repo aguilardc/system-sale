@@ -6,21 +6,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Products")
+@Table(name = "Sellers")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Product {
+public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String codigo;
     private String nombre;
-    private String descripcion;
-    private String marca;
-    private Double precio;
-    private Double precio_venta;
-    private Integer stock;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private String dni;
+    private String telefono;
 
 }

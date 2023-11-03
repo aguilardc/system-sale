@@ -1,8 +1,6 @@
 package com.systemsale.systemsale.controller;
 
-import com.systemsale.systemsale.dto.ClientDTO;
 import com.systemsale.systemsale.dto.ProductDTO;
-import com.systemsale.systemsale.entity.Client;
 import com.systemsale.systemsale.entity.Product;
 import com.systemsale.systemsale.service.product.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
