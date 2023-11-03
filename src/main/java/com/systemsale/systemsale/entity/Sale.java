@@ -5,27 +5,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-@Table(name = "Products")
+@Table(name = "Sales")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Product {
+public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String codigo;
-    private String nombre;
-    private String descripcion;
-    private String marca;
-    private Double precio;
-    private Double precio_venta;
-    private Integer stock;
+    private Timestamp fecha;
 
-    @OneToMany(mappedBy = "products")
+    @OneToMany(mappedBy = "sales")
     Set<SaleDetails> saleDetails;
-
 }
