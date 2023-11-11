@@ -12,6 +12,8 @@ public class CustomerDTO {
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private String edad;
+    private String dni;
+    private String telefono;
+    private String correo;
 
 }

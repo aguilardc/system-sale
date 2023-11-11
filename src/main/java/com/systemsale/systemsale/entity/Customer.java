@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "Customers")
 @NoArgsConstructor
@@ -21,4 +23,7 @@ public class Customer {
     private String dni;
     private String telefono;
     private String correo;
+
+    @OneToMany(mappedBy = "customer")
+    Set<Sale> sales;
 }
