@@ -22,4 +22,12 @@ public class Sale {
 
     @OneToMany(mappedBy = "sales")
     Set<SaleDetails> saleDetails;
+
+    @ManyToOne()
+    @JoinColumn(name = "seller_id", nullable = false)
+    private Seller seller;
+
+    @ManyToOne()
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 }

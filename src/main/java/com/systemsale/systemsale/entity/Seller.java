@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "Sellers")
 @NoArgsConstructor
@@ -14,12 +16,15 @@ public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String codigo;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String dni;
     private String telefono;
+
+    @OneToMany(mappedBy = "seller")
+    Set<Sale> sales;
 
 }
