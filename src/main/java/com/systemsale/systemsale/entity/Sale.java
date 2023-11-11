@@ -1,24 +1,30 @@
 package com.systemsale.systemsale.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.Set;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Sales")
-@NoArgsConstructor
-@Getter
-@Setter
 public class Sale {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SALE_ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqSale")
+    @SequenceGenerator(sequenceName = "SEQ_SALE", allocationSize = 1, name = "seqSale")
     private Long id;
-    private String codigo;
-    private Timestamp fecha;
+
+    @Size(min = 10, max = 10, message = "The code is required and must have at least {min} and maximum {max} characters")
+    @Column(name = "CODE", nullable = false) // SALE000001
+    private String code;
+
+    @Column(name = "DATE", nullable = false)
+    private Timestamp date;
 
     @OneToMany(mappedBy = "sales")
     Set<SaleDetails> saleDetails;

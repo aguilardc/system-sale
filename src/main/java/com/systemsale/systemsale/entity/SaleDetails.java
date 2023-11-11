@@ -1,7 +1,13 @@
 package com.systemsale.systemsale.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class SaleDetails {
     @EmbeddedId
@@ -17,8 +23,15 @@ public class SaleDetails {
     @JoinColumn(name = "product_id")
     Product products;
 
-    private Integer cantidad;
-    private String descripcion;
-    private Double precio_unitario;
-    private Double importe;
+    @Column(name = "QUANTITY", nullable = false)
+    private Integer quantity;
+
+    @Column(name = "DESCRIPTION", nullable = false)
+    private String description;
+
+    @Column(name = "UNIT_PRICE", nullable = false)
+    private Double unitPrice;
+
+    @Column(name = "AMOUNT", nullable = false)
+    private Double amount;
 }

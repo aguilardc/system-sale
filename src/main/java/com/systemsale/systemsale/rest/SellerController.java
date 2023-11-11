@@ -1,4 +1,4 @@
-package com.systemsale.systemsale.controller;
+package com.systemsale.systemsale.rest;
 
 import com.systemsale.systemsale.dto.SellerDTO;
 import com.systemsale.systemsale.entity.Seller;
