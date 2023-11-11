@@ -46,7 +46,7 @@ public class ProductController {
     public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Product product) {
         var product1 = productService.readById(id);
         if (product1 == null) return ResponseEntity.notFound().build();
-        product.setId(product1.getId());
+//        product.setId(product1.getId());
         ProductDTO objProduct = productService.update(product);
         return ResponseEntity.ok(objProduct);
     }

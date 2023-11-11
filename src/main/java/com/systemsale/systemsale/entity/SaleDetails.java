@@ -32,6 +32,6 @@ public class SaleDetails {
     @Column(name = "UNIT_PRICE", nullable = false)
     private Double unitPrice;
 
-    @Column(name = "AMOUNT", nullable = false)
-    private Double amount;
+    @Column(name = "TOTAL_PRICE", nullable = false)
+    private Double totalPrice;
 }

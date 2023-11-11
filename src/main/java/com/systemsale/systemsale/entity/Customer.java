@@ -25,12 +25,12 @@ public class Customer implements Serializable {
     @SequenceGenerator(sequenceName = "SEQ_CUSTOMER", allocationSize = 1, name = "seqCustomer")
     private Long id;
 
-    @Size(min = 5, max = 210, message = "The first name is required and must have at least {min} and maximum {max} characters")
+    @Size(min = 5, max = 100, message = "The first name is required and must have at least {min} and maximum {max} characters")
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
     //@CustomValidation
-    @Size(min = 5, max = 210, message = "The last name is required and must have at least {min} and maximum {max} characters")
+    @Size(min = 5, max = 100, message = "The last name is required and must have at least {min} and maximum {max} characters")
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
@@ -43,9 +43,8 @@ public class Customer implements Serializable {
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "STATUS")
-    @ColumnDefault("true")
-    private Boolean status;
+    @Column(name = "STATUS", nullable = false)
+    private Boolean status = true;
 
     @OneToMany(mappedBy = "customer")
     Set<Sale> sales;

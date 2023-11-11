@@ -1,19 +1,22 @@
 package com.systemsale.systemsale.service.customer;
 
-import com.systemsale.systemsale.dto.CustomerDTO;
 import com.systemsale.systemsale.entity.Customer;
+import com.systemsale.systemsale.service.ServiceException;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface ICustomerService {
-    CustomerDTO create(Customer customer);
+    List<Customer> findAll() throws ServiceException;
 
-    List<CustomerDTO> read();
+    List<Customer> findLikeObject(String name) throws ServiceException;
 
-    CustomerDTO readById(Long id);
+    Optional<Customer> findById(Long id) throws ServiceException;
 
-    CustomerDTO update(Customer customer);
+    Customer save(Customer customer) throws ServiceException;
 
-    Boolean delete(Long id);
+    Customer update(Customer customer) throws ServiceException;
+
+    Boolean delete(Customer customer) throws ServiceException;
 }

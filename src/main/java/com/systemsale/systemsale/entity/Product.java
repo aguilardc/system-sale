@@ -53,8 +53,7 @@ public class Product implements Serializable {
     private Integer stock;
 
     @Column(name = "STATUS")
-    @ColumnDefault("true")
-    private Boolean status;
+    private Boolean status = true;
 
     @OneToMany(mappedBy = "products")
     Set<SaleDetails> saleDetails;

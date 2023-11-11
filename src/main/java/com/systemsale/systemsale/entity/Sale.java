@@ -26,6 +26,9 @@ public class Sale {
     @Column(name = "DATE", nullable = false)
     private Timestamp date;
 
+    @Column(name = "STATUS", nullable = false)
+    private Boolean status;
+
     @OneToMany(mappedBy = "sales")
     Set<SaleDetails> saleDetails;
 
