@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class SaleDetails {
+public class SaleDetails implements Serializable {
     @EmbeddedId
     SaleDetailsKey id;
 

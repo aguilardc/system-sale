@@ -3,18 +3,20 @@ package com.systemsale.systemsale.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Set;
 
-@Builder
+
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "Customers")
-public class Customer implements Serializable {
+@Data
+@EqualsAndHashCode(callSuper=false)
+@Entity(name = "customers")
+@Table(name = "CUSTOMERS")
+public class Customer extends Generic implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -22,7 +24,7 @@ public class Customer implements Serializable {
     @Id
     @Column(name = "CUSTOMER_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCustomer")
-    @SequenceGenerator(sequenceName = "SEQ_CUSTOMER", allocationSize = 1, name = "seqCustomer")
+    @SequenceGenerator(sequenceName = "SEQ_CUSTOMERS", allocationSize = 1, name = "seqCustomer")
     private Long id;
 
     @Size(min = 5, max = 100, message = "The first name is required and must have at least {min} and maximum {max} characters")
@@ -46,6 +48,6 @@ public class Customer implements Serializable {
     @Column(name = "STATUS", nullable = false)
     private Boolean status = true;
 
-    @OneToMany(mappedBy = "customer")
-    Set<Sale> sales;
+//    @OneToMany(mappedBy = "customer")
+//    Set<Sale> sales;
 }

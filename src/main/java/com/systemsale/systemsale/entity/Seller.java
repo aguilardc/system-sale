@@ -2,22 +2,24 @@ package com.systemsale.systemsale.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.util.Set;
 
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "Sellers")
-@NoArgsConstructor
-@Getter
-@Setter
-public class Seller {
+public class Seller extends Generic implements Serializable {
     @Id
     @Column(name = "SELLER_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqSeller")
-    @SequenceGenerator(sequenceName = "SEQ_SELLER", allocationSize = 1, name = "seqSeller")
+    @SequenceGenerator(sequenceName = "SEQ_SELLERS", allocationSize = 1, name = "seqSeller")
     private Long id;
 
     @Column(name = "CODE", nullable = false)
@@ -37,10 +39,8 @@ public class Seller {
     @Column(name = "TELEPHONE", nullable = false)
     private String telephone;
 
-    @Column(name = "STATUS", nullable = false)
-    private Boolean status = true;
 
-    @OneToMany(mappedBy = "seller")
-    Set<Sale> sales;
+//    @OneToMany(mappedBy = "seller")
+//    Set<Sale> sales;
 
 }

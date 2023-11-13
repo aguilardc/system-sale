@@ -1,18 +1,7 @@
 package com.systemsale.systemsale.service.seller;
 
-import com.systemsale.systemsale.dto.SellerDTO;
 import com.systemsale.systemsale.entity.Seller;
+import com.systemsale.systemsale.service.IGenericService;
 
-import java.util.List;
-
-public interface ISellerService {
-    SellerDTO create(Seller seller);
-
-    List<SellerDTO> read();
-
-    SellerDTO readById(Long id);
-
-    SellerDTO update(Seller seller);
-
-    Boolean delete(Long id);
+public interface ISellerService extends IGenericService<Seller> {
 }

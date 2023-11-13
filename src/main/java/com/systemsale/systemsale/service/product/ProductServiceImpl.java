@@ -1,11 +1,8 @@
 package com.systemsale.systemsale.service.product;
 
-import com.systemsale.systemsale.dto.ProductDTO;
 import com.systemsale.systemsale.entity.Product;
-import com.systemsale.systemsale.mapper.ProductMapper;
-import com.systemsale.systemsale.repository.IProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+import com.systemsale.systemsale.repository.jpa.standar.IProductRepository;
+import com.systemsale.systemsale.service.ServiceException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,46 +11,59 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements IProductService {
 
-    @Autowired
-    private IProductRepository productRepository;
+    private final IProductRepository productRepository;
 
-    @Autowired
-    private ProductMapper productMapper;
-
-    @Override
-    public ProductDTO create(Product product) {
-        Product product1 = productRepository.save(product);
-        return productMapper.toDTO(product1);
+    public ProductServiceImpl(IProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @Override
-    public List<ProductDTO> read() {
-        var products = productRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-        return productMapper.toDTOList(products);
-    }
-
-    @Override
-    public ProductDTO readById(Long id) {
-        Optional<Product> product = productRepository.findById(id);
-        return product.map(value -> productMapper.toDTO((Product) value)).orElse(null);
-
-    }
-
-    @Override
-    public ProductDTO update(Product product) {
-        Product product1 = productRepository.save(product);
-        return productMapper.toDTO(product1);
-    }
-
-    @Override
-    public Boolean delete(Long id) {
+    public List<Product> findAll() throws ServiceException {
         try {
-            productRepository.deleteById(id);
-            return true;
+            return this.productRepository.findAll();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
+            throw new ServiceException(e);
         }
+    }
 
+    @Override
+    public List<Product> findLikeObject(Product product) throws ServiceException {
+        try {
+            return null;
+        } catch (Exception e) {
+            throw new ServiceException();
+        }
+    }
+
+    @Override
+    public Optional<Product> findById(Long id) throws ServiceException {
+        try {
+            return this.productRepository.findById(id);
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Product save(Product product) throws ServiceException {
+        try {
+            return this.productRepository.save(product);
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Product update(Product product) throws ServiceException {
+        try {
+            return this.productRepository.save(product);
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Boolean delete(Long id) throws ServiceException {
+        return null;
     }
 }

@@ -3,26 +3,27 @@ package com.systemsale.systemsale.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Set;
 
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity(name = "products")
 @Table(name = "Products")
-public class Product implements Serializable {
+public class Product extends Generic implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "PRODUCT_ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqProduct")
-    @SequenceGenerator(sequenceName = "SEQ_PRODUCT", allocationSize = 1, name = "seqProduct")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqProducts")
+//    @SequenceGenerator(sequenceName = "SEQ_PRODUCTS", allocationSize = 1, name = "seqProducts")
     private Long id;
 
     @Size(min = 10, max = 10, message = "The code is required and must have at least {min} and maximum {max} characters")
@@ -52,10 +53,10 @@ public class Product implements Serializable {
     @Column(name = "STOCK", nullable = false)
     private Integer stock;
 
-    @Column(name = "STATUS")
+    @Column(name = "STATUS", nullable = false)
     private Boolean status = true;
 
-    @OneToMany(mappedBy = "products")
-    Set<SaleDetails> saleDetails;
+//    @OneToMany(mappedBy = "products")
+//    Set<SaleDetails> saleDetails;
 
 }

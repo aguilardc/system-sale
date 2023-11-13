@@ -1,10 +1,8 @@
 package com.systemsale.systemsale.service.seller;
 
-import com.systemsale.systemsale.dto.SellerDTO;
 import com.systemsale.systemsale.entity.Seller;
-import com.systemsale.systemsale.mapper.SellerMapper;
-import com.systemsale.systemsale.repository.ISellerRepository;
-import org.springframework.data.domain.Sort;
+import com.systemsale.systemsale.repository.jpa.standar.ISellerRepository;
+import com.systemsale.systemsale.service.ServiceException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,46 +12,58 @@ import java.util.Optional;
 public class SellerServiceImpl implements ISellerService {
 
     private final ISellerRepository sellerRepository;
-    private final SellerMapper sellerMapper;
 
-    public SellerServiceImpl(ISellerRepository sellerRepository, SellerMapper sellerMapper) {
+    public SellerServiceImpl(ISellerRepository sellerRepository) {
         this.sellerRepository = sellerRepository;
-        this.sellerMapper = sellerMapper;
     }
 
     @Override
-    public SellerDTO create(Seller seller) {
-        Seller seller1 = sellerRepository.save(seller);
-        return sellerMapper.toDTO(seller1);
-
-    }
-
-    @Override
-    public List<SellerDTO> read() {
-        var sellers = sellerRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-        return this.sellerMapper.toDTOList(sellers);
-    }
-
-    @Override
-    public SellerDTO readById(Long id) {
-        Optional<Seller> seller = sellerRepository.findById(id);
-        return seller.map(value -> sellerMapper.toDTO((Seller) value)).orElse(null);
-    }
-
-    @Override
-    public SellerDTO update(Seller seller) {
-        Seller seller1 = sellerRepository.save(seller);
-        return sellerMapper.toDTO(seller1);
-    }
-
-    @Override
-    public Boolean delete(Long id) {
+    public List<Seller> findAll() throws ServiceException {
         try {
-            sellerRepository.deleteById(id);
-            return true;
+            return this.sellerRepository.findAll();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
+            throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public List<Seller> findLikeObject(Seller seller) throws ServiceException {
+        try {
+            return null;
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Optional<Seller> findById(Long id) throws ServiceException {
+        try {
+            return this.sellerRepository.findById(id);
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Seller save(Seller seller) throws ServiceException {
+        try {
+            return this.sellerRepository.save(seller);
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Seller update(Seller seller) throws ServiceException {
+        try {
+            return this.sellerRepository.save(seller);
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Boolean delete(Long id) throws ServiceException {
+        return null;
     }
 }
