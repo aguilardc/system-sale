@@ -24,7 +24,7 @@ public class CustomerController extends GenericController implements ICustomerCo
         this.customerService = customerService;
     }
 
-    @GetMapping
+    @Override
     public ResponseEntity<?> findAll() {
         try {
             return super.list(this.customerService.findAll());
@@ -34,17 +34,17 @@ public class CustomerController extends GenericController implements ICustomerCo
         }
     }
 
-    @PostMapping
+    @Override
     public ResponseEntity<?> save(@RequestBody Customer customer) {
         try {
-            return super.created(this.customerService.save(customer));
+            return super.created(this.customerService.saveUSP(customer));
         } catch (Exception e) {
             log.error(e.getMessage());
             return super.internalError();
         }
     }
 
-    @GetMapping("/{id}")
+    @Override
     public ResponseEntity<?> findById(@PathVariable Long id) {
         try {
             Optional<Customer> customer = this.customerService.findById(id);
@@ -58,5 +58,13 @@ public class CustomerController extends GenericController implements ICustomerCo
         }
     }
 
-
+    @Override
+    public ResponseEntity<?> findByLike(@RequestParam String dni) {
+        try {
+            return super.list(this.customerService.findLikeObject(Customer.builder().dni(dni).build()));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return super.internalError();
+        }
+    }
 }

@@ -1,12 +1,36 @@
 package com.systemsale.systemsale.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serial;
 import java.io.Serializable;
+
+/** Matricular el Store Procedure */
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name="customers.insert",
+                procedureName = "PKG_CUSTOMERS.USP_REGISTRAR",
+                parameters = {
+                        @StoredProcedureParameter(mode=ParameterMode.OUT, name = "P_CUSTOMER_ID", type = Long.class),
+                        @StoredProcedureParameter(mode=ParameterMode.IN, name = "P_FIRST_NAME", type = String.class),
+                        @StoredProcedureParameter(mode=ParameterMode.IN, name = "P_LAST_NAME", type = String.class),
+                        @StoredProcedureParameter(mode=ParameterMode.IN, name = "P_DNI", type = String.class),
+                        @StoredProcedureParameter(mode=ParameterMode.IN, name = "P_TELEPHONE", type = String.class),
+                        @StoredProcedureParameter(mode=ParameterMode.IN, name = "P_EMAIL", type = String.class)
+                }
+        ),
+        @NamedStoredProcedureQuery(
+                name="customers.find",
+                procedureName = "PKG_CUSTOMERS.USP_BUSCAR",
+                resultClasses = Customer.class,
+                parameters = {
+                        @StoredProcedureParameter(mode=ParameterMode.REF_CURSOR, name = "P_CURSOR", type = Void.class),
+                        @StoredProcedureParameter(mode=ParameterMode.IN, name = "P_DNI", type = String.class)
+                }
+        )
+})
 
 
 @SuperBuilder
@@ -23,16 +47,11 @@ public class Customer extends Generic implements Serializable {
 
     @Id
     @Column(name = "CUSTOMER_ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCustomer")
-    @SequenceGenerator(sequenceName = "SEQ_CUSTOMERS", allocationSize = 1, name = "seqCustomer")
     private Long id;
 
-    @Size(min = 5, max = 100, message = "The first name is required and must have at least {min} and maximum {max} characters")
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
-    //@CustomValidation
-    @Size(min = 5, max = 100, message = "The last name is required and must have at least {min} and maximum {max} characters")
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
@@ -44,9 +63,6 @@ public class Customer extends Generic implements Serializable {
 
     @Column(name = "EMAIL")
     private String email;
-
-    @Column(name = "STATUS", nullable = false)
-    private Boolean status = true;
 
 //    @OneToMany(mappedBy = "customer")
 //    Set<Sale> sales;

@@ -1,0 +1,60 @@
+create or replace NONEDITIONABLE PACKAGE PKG_CUSTOMERS AS
+
+    PROCEDURE USP_REGISTRAR(
+       P_CUSTOMER_ID    OUT CUSTOMERS.CUSTOMER_ID%TYPE,
+       P_FIRST_NAME     IN CUSTOMERS.FIRST_NAME%TYPE,
+       P_LAST_NAME      IN CUSTOMERS.LAST_NAME%TYPE,
+       P_DNI            IN CUSTOMERS.DNI%TYPE,
+       P_TELEPHONE      IN CUSTOMERS.TELEPHONE%TYPE,
+       P_EMAIL          IN CUSTOMERS.EMAIL%TYPE
+    );
+
+END PKG_CUSTOMERS;
+
+CREATE OR REPLACE
+PACKAGE BODY PKG_CUSTOMERS AS
+
+  PROCEDURE USP_REGISTRAR(
+       P_CUSTOMER_ID    OUT CUSTOMERS.CUSTOMER_ID%TYPE,
+       P_FIRST_NAME     IN CUSTOMERS.FIRST_NAME%TYPE,
+       P_LAST_NAME      IN CUSTOMERS.LAST_NAME%TYPE,
+       P_DNI            IN CUSTOMERS.DNI%TYPE,
+       P_TELEPHONE      IN CUSTOMERS.TELEPHONE%TYPE,
+       P_EMAIL          IN CUSTOMERS.EMAIL%TYPE
+    ) AS
+  BEGIN
+    -- Generando el ID Customer
+    SELECT
+        SEQ_CUSTOMERS.NEXTVAL
+    INTO
+        P_CUSTOMER_ID
+    FROM
+        DUAL;
+
+    INSERT INTO
+        CUSTOMERS
+        (
+            CUSTOMER_ID,
+            FIRST_NAME,
+            LAST_NAME,
+            DNI,
+            TELEPHONE,
+            EMAIL,
+            --
+            STATUS
+        )
+        VALUES
+        (
+            P_CUSTOMER_ID,
+            P_FIRST_NAME,
+            P_LAST_NAME,
+            P_DNI,
+            P_TELEPHONE,
+            P_EMAIL,
+            --
+            1
+        );
+    NULL;
+  END USP_REGISTRAR;
+
+END PKG_CUSTOMERS;

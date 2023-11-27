@@ -14,16 +14,12 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "Sellers")
+@Table(name = "SELLERS")
 public class Seller extends Generic implements Serializable {
     @Id
     @Column(name = "SELLER_ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqSeller")
-    @SequenceGenerator(sequenceName = "SEQ_SELLERS", allocationSize = 1, name = "seqSeller")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "CODE", nullable = false)
-    private String code;
 
     @Size(min = 5, max = 100, message = "The first name is required and must have at least {min} and maximum {max} characters")
     @Column(name = "FIRST_NAME", nullable = false)

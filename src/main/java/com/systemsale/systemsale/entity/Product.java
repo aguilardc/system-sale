@@ -4,9 +4,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @SuperBuilder
 @NoArgsConstructor
@@ -14,7 +17,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "products")
-@Table(name = "Products")
+@Table(name = "PRODUCTS")
 public class Product extends Generic implements Serializable {
 
     @Serial
@@ -22,11 +25,10 @@ public class Product extends Generic implements Serializable {
 
     @Id
     @Column(name = "PRODUCT_ID", nullable = false)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqProducts")
-//    @SequenceGenerator(sequenceName = "SEQ_PRODUCTS", allocationSize = 1, name = "seqProducts")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 10, max = 10, message = "The code is required and must have at least {min} and maximum {max} characters")
+    @Size(min = 8, max = 8, message = "The code is required and must have at least {min} and maximum {max} characters")
     @Column(name = "CODE", nullable = false) // PROD000001
     private String code;
 
@@ -37,21 +39,19 @@ public class Product extends Generic implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @Size(message = "The brand is required")
     @Column(name = "BRAND", nullable = false)
     private String brand;
 
-    @Size(message = "The price is required")
     @Column(name = "PRICE", nullable = false)
-    private Double price;
+    @NumberFormat(style = NumberFormat.Style.CURRENCY)
+    private BigDecimal price;
 
-    @Size(message = "The sale price is required")
     @Column(name = "SALE_PRICE", nullable = false)
-    private Double salePrice;
+    @NumberFormat(style = NumberFormat.Style.CURRENCY)
+    private BigDecimal salePrice;
 
-    @Size(message = "The stock is required")
-    @Column(name = "STOCK", nullable = false)
-    private Integer stock;
+    @Column(name = "STOCK", nullable = false, columnDefinition = "SMALLINT")
+    private Short stock;
 
     @Column(name = "STATUS", nullable = false)
     private Boolean status = true;

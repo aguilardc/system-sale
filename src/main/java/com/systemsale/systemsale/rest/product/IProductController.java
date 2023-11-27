@@ -15,6 +15,6 @@ public interface IProductController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Product product);
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id);
 }

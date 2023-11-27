@@ -23,7 +23,7 @@ public class ProductController extends GenericController implements IProductCont
         this.productService = productService;
     }
 
-    @GetMapping
+    @Override
     public ResponseEntity<?> findAll() {
         try {
             return super.list(this.productService.findAll());
@@ -33,7 +33,7 @@ public class ProductController extends GenericController implements IProductCont
         }
     }
 
-    @PostMapping
+    @Override
     public ResponseEntity<?> save(@RequestBody Product product) {
         try {
             return super.created(this.productService.save(product));
@@ -43,7 +43,7 @@ public class ProductController extends GenericController implements IProductCont
         }
     }
 
-    @GetMapping("/{id}")
+    @Override
     public ResponseEntity<?> findById(@PathVariable Long id) {
         try {
             Optional<Product> product = this.productService.findById(id);

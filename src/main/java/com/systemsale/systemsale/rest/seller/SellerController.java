@@ -2,29 +2,58 @@ package com.systemsale.systemsale.rest.seller;
 
 import com.systemsale.systemsale.entity.Seller;
 import com.systemsale.systemsale.rest.GenericController;
-import com.systemsale.systemsale.service.seller.SellerServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.systemsale.systemsale.service.seller.ISellerService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.util.List;
+import static java.util.Objects.isNull;
 
+import java.util.Optional;
+
+@Slf4j
 @RestController
-@RequestMapping("api/vendedores")
+@RequestMapping("api/sellers")
 public class SellerController extends GenericController implements ISellerController {
+
+    private final ISellerService sellerService;
+
+    public SellerController(ISellerService sellerService) {
+        this.sellerService = sellerService;
+    }
+
     @Override
     public ResponseEntity<?> findAll() {
-        return null;
+        try {
+            return super.list(this.sellerService.findAll());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return super.internalError();
+        }
     }
 
     @Override
     public ResponseEntity<?> save(Seller seller) {
-        return null;
+        try {
+            return super.created(this.sellerService.save(seller));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return super.internalError();
+        }
     }
 
     @Override
     public ResponseEntity<?> findById(Long id) {
-        return null;
+        try {
+            Optional<Seller> seller = this.sellerService.findById(id);
+            if (isNull(seller) || seller.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(seller, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return super.internalError();
+        }
     }
 }

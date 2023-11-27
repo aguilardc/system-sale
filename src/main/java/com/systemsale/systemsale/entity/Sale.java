@@ -15,12 +15,11 @@ import java.sql.Timestamp;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "Sales")
+@Table(name = "SALES")
 public class Sale extends Generic implements Serializable {
     @Id
     @Column(name = "SALE_ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqSale")
-    @SequenceGenerator(sequenceName = "SEQ_SALES", allocationSize = 1, name = "seqSale")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(min = 10, max = 10, message = "The code is required and must have at least {min} and maximum {max} characters")

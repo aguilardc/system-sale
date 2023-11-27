@@ -14,6 +14,6 @@ public interface ISellerController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Seller seller);
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id);
 }
