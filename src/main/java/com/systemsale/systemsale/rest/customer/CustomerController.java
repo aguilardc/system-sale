@@ -3,7 +3,7 @@ package com.systemsale.systemsale.rest.customer;
 
 import com.systemsale.systemsale.entity.Customer;
 import com.systemsale.systemsale.rest.GenericController;
-import com.systemsale.systemsale.rest.constants.APIEndPoint;
+import static com.systemsale.systemsale.rest.constants.APIEndPoint.API_CUSTOMERS;
 import com.systemsale.systemsale.service.customer.ICustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping(APIEndPoint.API_CUSTOMERS)
+@RequestMapping(API_CUSTOMERS)
 public class CustomerController extends GenericController implements ICustomerController {
     private final ICustomerService customerService;
 

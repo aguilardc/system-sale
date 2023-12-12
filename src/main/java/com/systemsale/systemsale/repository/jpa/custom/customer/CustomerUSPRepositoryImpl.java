@@ -8,6 +8,7 @@ import jakarta.persistence.PersistenceContextType;
 import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository

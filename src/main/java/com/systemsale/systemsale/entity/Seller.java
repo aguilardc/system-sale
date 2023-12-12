@@ -21,11 +21,9 @@ public class Seller extends Generic implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 5, max = 100, message = "The first name is required and must have at least {min} and maximum {max} characters")
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
-    @Size(min = 5, max = 100, message = "The last name is required and must have at least {min} and maximum {max} characters")
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
@@ -35,6 +33,8 @@ public class Seller extends Generic implements Serializable {
     @Column(name = "TELEPHONE", nullable = false)
     private String telephone;
 
+    @Column(name = "STATUS", nullable = false)
+    private Boolean status = true;
 
 //    @OneToMany(mappedBy = "seller")
 //    Set<Sale> sales;

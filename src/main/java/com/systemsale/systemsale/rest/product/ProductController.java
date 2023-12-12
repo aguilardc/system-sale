@@ -8,13 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.systemsale.systemsale.rest.constants.APIEndPoint.API_PRODUCTS;
 import static java.util.Objects.isNull;
 
 import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("api/products")
+@RequestMapping(API_PRODUCTS)
 public class ProductController extends GenericController implements IProductController {
 
     private final IProductService productService;

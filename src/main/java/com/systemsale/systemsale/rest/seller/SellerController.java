@@ -8,13 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.systemsale.systemsale.rest.constants.APIEndPoint.API_SELLERS;
 import static java.util.Objects.isNull;
 
 import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("api/sellers")
+@RequestMapping(API_SELLERS)
 public class SellerController extends GenericController implements ISellerController {
 
     private final ISellerService sellerService;

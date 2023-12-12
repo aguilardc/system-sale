@@ -1,6 +1,5 @@
 package com.systemsale.systemsale.rest.product;
 
-
 import com.systemsale.systemsale.entity.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
